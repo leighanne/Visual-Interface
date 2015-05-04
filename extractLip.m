@@ -29,10 +29,6 @@ max_right = max(right_pix);
 max_right_ind = find(right_pix==max_right);
 right_row = right_row(max_right_ind); right_row = right_row(1);
 
-plot(left_col, left_row,'r*');
-plot(right_col, right_row, 'r*');
-hold on
-
 % lip middle point column
 lr_dist = right_col-left_col;
 % upper mid is traced from the left corner
@@ -46,7 +42,6 @@ while abs(left_tmp(2)-left_col)<(lr_dist/2)*0.9
     max_r = max_r(1)+left_tmp(1)-win_size;
     max_c = max_c(1)+left_tmp(2)+1;
     left_tmp = [max_r,max_c];
-    plot(left_tmp(2), left_tmp(1),'g*');
 end
 right_tmp = [right_row,right_col];
 while abs(right_tmp(2)-right_col)<(lr_dist/2)*0.9
@@ -57,7 +52,14 @@ while abs(right_tmp(2)-right_col)<(lr_dist/2)*0.9
     max_r = max_r(1)+right_tmp(1)+1;
     max_c = max_c(1)+right_tmp(2)-win_size;
     right_tmp = [max_r,max_c];
-    plot(right_tmp(2), right_tmp(1),'g*');
 end
+up_mid = left_tmp;
+lo_mid = right_tmp;
+left_corner = [left_row,left_col];
+right_corner = [right_row, right_col];
+plot(left_corner(2),left_corner(1),'g*');
+plot(right_corner(2),right_corner(1),'g*');
+plot(up_mid(2),up_mid(1),'g*');
+plot(lo_mid(2),lo_mid(1),'g*');
 end
 
