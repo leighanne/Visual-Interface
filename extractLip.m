@@ -36,6 +36,10 @@ lr_dist = right_col-left_col;
 left_tmp = [left_row,left_col];
 while abs(left_tmp(2)-left_col)<(lr_dist/2)*0.9
     %trace to the upper_right direction
+%     plot(left_tmp(2),left_tmp(1),'g*');
+    if left_tmp(1)-1<1 || left_tmp(1)-win_size<1 || left_tmp(2)+1>size(k,2) || left_tmp(2)+win_size>size(k,2)
+        break;
+    end
     win = k((left_tmp(1)-win_size):(left_tmp(1)-1),(left_tmp(2)+1):(left_tmp(2)+win_size));
     max_pix = max(max(win));
     [max_r,max_c] = find(win==max_pix);
@@ -46,6 +50,9 @@ end
 right_tmp = [right_row,right_col];
 while abs(right_tmp(2)-right_col)<(lr_dist/2)*0.9
     %trace to the lower_left direction
+    if (right_tmp(1)+1>size(k,1) || right_tmp(1)+win_size>size(k,1) || right_tmp(2)-1<1 || right_tmp(2)-win_size<1)
+        break;
+    end
     win = k((right_tmp(1)+1):(right_tmp(1)+win_size),(right_tmp(2)-win_size):(right_tmp(2)-1));
     max_pix = max(max(win));
     [max_r,max_c] = find(win==max_pix);
